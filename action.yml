@@ -26,8 +26,7 @@ runs:
 
             run: |
                 mkdir -p $UNIDOC_BINARIES
-                echo "Downloading from $UNIDOC_MIRROR/unidoc/$UNIDOC_VERSION/$UNIDOC_PLATFORM/unidoc.gz"
-                curl -L $UNIDOC_MIRROR/unidoc/$UNIDOC_VERSION/$UNIDOC_PLATFORM/unidoc.gz \
+                curl -L $UNIDOC_MIRROR/$UNIDOC_VERSION/$UNIDOC_PLATFORM/unidoc.gz \
                     -o $UNIDOC_BINARIES/unidoc.gz
                 gzip -fdk $UNIDOC_BINARIES/unidoc.gz
                 chmod +x $UNIDOC_BINARIES/unidoc
