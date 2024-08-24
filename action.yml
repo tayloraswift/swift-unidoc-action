@@ -9,20 +9,18 @@ inputs:
 
 runs:
     using: composite
-    env:
-        UNIDOC_VERSION: ${{ inputs.unidoc-version }}
-
     steps:
         -   name: Cache Unidoc
             uses: actions/cache@v2
             with:
                 path:
-                key: "unidoc:${{ runner.os }}-${{ runner.arch }}/${{ env.UNIDOC_VERSION }}"
+                key: "unidoc:${{ runner.os }}-${{ runner.arch }}/${{ inputs.unidoc-version }}"
 
         -   name: Download Unidoc
             env:
-                UNIDOC_PLATFORM: ${{ runner.os }}-${{ runner.arch }}
                 UNIDOC_BINARIES: $HOME/bin
+                UNIDOC_PLATFORM: ${{ runner.os }}-${{ runner.arch }}
+                UNIDOC_VERSION: ${{ inputs.unidoc-version }}
 
             run: |
                 mkdir -p $UNIDOC_BINARIES
