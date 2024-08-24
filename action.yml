@@ -1,0 +1,40 @@
+name: "Unidoc"
+description: "Validates Swift documentation using Unidoc"
+
+inputs:
+    unidoc-version:
+        description: "The version of Unidoc to use"
+        required: true
+        default: "0.19.0"
+
+runs:
+    using: composite
+    env:
+        UNIDOC_VERSION: ${{ inputs.unidoc-version }}
+
+    steps:
+        -   name: Cache Unidoc
+            uses: actions/cache@v2
+            with:
+                path:
+                key: "unidoc:${{ runner.os }}-${{ runner.arch }}/${{ env.UNIDOC_VERSION }}"
+
+        -   name: Download Unidoc
+            env:
+                UNIDOC_PLATFORM: ${{ runner.os }}-${{ runner.arch }}
+                UNIDOC_BINARIES: $HOME/bin
+
+            run: |
+                mkdir -p $UNIDOC_BINARIES
+                curl -L \
+                    https://static.swiftinit.org/unidoc/\
+                    $UNIDOC_VERSION/$UNIDOC_PLATFORM/unidoc.gz \
+                    -o $UNIDOC_BINARIES/unidoc.gz
+                gzip -fdk $UNIDOC_BINARIES/unidoc.gz
+                chmod +x $UNIDOC_BINARIES/unidoc
+                echo "$UNIDOC_BINARIES" >> $GITHUB_PATH
+
+        -   name: Check Unidoc
+            run: |
+                unidoc --version
+                unidoc --help
