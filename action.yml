@@ -13,7 +13,7 @@ runs:
         -   name: Cache Unidoc
             uses: actions/cache@v2
             with:
-                path:
+                path: "{{ env.HOME }}/bin/unidoc.gz"
                 key: "unidoc:${{ runner.os }}-${{ runner.arch }}/${{ inputs.unidoc-version }}"
 
         -   name: Download Unidoc
