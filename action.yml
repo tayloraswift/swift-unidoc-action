@@ -1,5 +1,5 @@
-name: "Unidoc"
-description: "Validates Swift documentation using Unidoc"
+name: "Swift Unidoc"
+description: "Validate Swift documentation using Unidoc"
 
 inputs:
     unidoc-version:
@@ -35,5 +35,4 @@ runs:
         -   name: Check Unidoc
             shell: bash
             run: |
-                unidoc --version
                 unidoc --help
