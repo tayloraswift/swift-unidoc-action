@@ -22,12 +22,11 @@ runs:
                 UNIDOC_BINARIES: $HOME/bin
                 UNIDOC_PLATFORM: ${{ runner.os }}-${{ runner.arch }}
                 UNIDOC_VERSION: ${{ inputs.unidoc-version }}
+                UNIDOC_MIRROR: "https://static.swiftinit.org/unidoc"
 
             run: |
                 mkdir -p $UNIDOC_BINARIES
-                curl -L \
-                    https://static.swiftinit.org/unidoc/\
-                    $UNIDOC_VERSION/$UNIDOC_PLATFORM/unidoc.gz \
+                curl -L $UNIDOC_MIRROR/unidoc/$UNIDOC_VERSION/$UNIDOC_PLATFORM/unidoc.gz \
                     -o $UNIDOC_BINARIES/unidoc.gz
                 gzip -fdk $UNIDOC_BINARIES/unidoc.gz
                 chmod +x $UNIDOC_BINARIES/unidoc
