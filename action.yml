@@ -17,6 +17,7 @@ runs:
                 key: "unidoc:${{ runner.os }}-${{ runner.arch }}/${{ inputs.unidoc-version }}"
 
         -   name: Download Unidoc
+            shell: bash
             env:
                 UNIDOC_BINARIES: $HOME/bin
                 UNIDOC_PLATFORM: ${{ runner.os }}-${{ runner.arch }}
@@ -33,6 +34,7 @@ runs:
                 echo "$UNIDOC_BINARIES" >> $GITHUB_PATH
 
         -   name: Check Unidoc
+            shell: bash
             run: |
                 unidoc --version
                 unidoc --help
