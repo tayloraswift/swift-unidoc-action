@@ -1,5 +1,5 @@
-name: "Swift Unidoc"
-description: "Validate Swift documentation using Unidoc"
+name: "Unidoc install"
+description: "Install Swift Unidoc"
 
 inputs:
     unidoc-version:
@@ -13,24 +13,35 @@ runs:
         -   name: Cache Unidoc
             uses: actions/cache@v2
             with:
-                path: "{{ env.HOME }}/bin/unidoc.gz"
+                path: "/unidoc/bin/unidoc.gz"
                 key: "unidoc:${{ runner.os }}-${{ runner.arch }}/${{ inputs.unidoc-version }}"
+
+        -   name: Cache status
+            id:   cache_status
+            uses: andstor/file-existence-action@v1
+            with:
+                files: "/unidoc/bin/unidoc.gz"
 
         -   name: Download Unidoc
             shell: bash
+            if: steps.cache_status.outputs.files_exists == 'false'
             env:
-                UNIDOC_BINARIES: $HOME/bin
                 UNIDOC_PLATFORM: ${{ runner.os }}-${{ runner.arch }}
                 UNIDOC_VERSION: ${{ inputs.unidoc-version }}
                 UNIDOC_MIRROR: "https://static.swiftinit.org/unidoc"
 
             run: |
-                mkdir -p $UNIDOC_BINARIES
+                mkdir -p /unidoc/bin
                 curl -L $UNIDOC_MIRROR/$UNIDOC_VERSION/$UNIDOC_PLATFORM/unidoc.gz \
-                    -o $UNIDOC_BINARIES/unidoc.gz
-                gzip -fdk $UNIDOC_BINARIES/unidoc.gz
-                chmod +x $UNIDOC_BINARIES/unidoc
-                echo "$UNIDOC_BINARIES" >> $GITHUB_PATH
+                    -o /unidoc/bin/unidoc.gz
+
+        -   name: Install Unidoc
+            shell: bash
+            run: |
+                mkdir -p /unidoc/bin
+                gzip -fdk /unidoc/bin/unidoc.gz
+                chmod +x /unidoc/bin/unidoc
+                echo "/unidoc/bin" >> $GITHUB_PATH
 
         -   name: Check Unidoc
             shell: bash
