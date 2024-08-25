@@ -11,39 +11,35 @@ runs:
     using: composite
     steps:
         -   name: Cache Unidoc
+            id:   cache_unidoc
             uses: actions/cache@v2
             with:
                 path: "/unidoc/bin/unidoc.gz"
                 key: "unidoc:${{ runner.os }}-${{ runner.arch }}/${{ inputs.unidoc-version }}"
 
-        -   name: Cache status
-            id:   cache_status
-            uses: andstor/file-existence-action@v1
-            with:
-                files: "/unidoc/bin/unidoc.gz"
-
         -   name: Download Unidoc
             shell: bash
-            if: steps.cache_status.outputs.files_exists == 'false'
+            if: steps.cache_unidoc.outputs.cache-hit != 'true'
             env:
                 UNIDOC_PLATFORM: ${{ runner.os }}-${{ runner.arch }}
                 UNIDOC_VERSION: ${{ inputs.unidoc-version }}
                 UNIDOC_MIRROR: "https://static.swiftinit.org/unidoc"
 
             run: |
-                mkdir -p /unidoc/bin
-                curl -L $UNIDOC_MIRROR/$UNIDOC_VERSION/$UNIDOC_PLATFORM/unidoc.gz \
+                sudo mkdir -p /unidoc/bin
+                sudo curl -L $UNIDOC_MIRROR/$UNIDOC_VERSION/$UNIDOC_PLATFORM/unidoc.gz \
                     -o /unidoc/bin/unidoc.gz
 
         -   name: Install Unidoc
             shell: bash
             run: |
-                mkdir -p /unidoc/bin
-                gzip -fdk /unidoc/bin/unidoc.gz
-                chmod +x /unidoc/bin/unidoc
+                sudo mkdir -p /unidoc/bin
+                sudo gzip -fdk /unidoc/bin/unidoc.gz
+                sudo chmod +x /unidoc/bin/unidoc
                 echo "/unidoc/bin" >> $GITHUB_PATH
 
         -   name: Check Unidoc
             shell: bash
             run: |
+                cat $GITHUB_PATH
                 unidoc --help
