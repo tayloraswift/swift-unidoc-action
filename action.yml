@@ -10,11 +10,16 @@ inputs:
 runs:
     using: composite
     steps:
+        -   name: Create installation directory
+            shell: bash
+            run: |
+                mkdir -p ~/unidoc/bin
+
         -   name: Cache Unidoc
             id:   cache
             uses: actions/cache@v2
             with:
-                path: "$HOME/unidoc/bin/unidoc.gz"
+                path: "~/unidoc/bin/unidoc.gz"
                 key: "unidoc:${{ runner.os }}-${{ runner.arch }}/${{ inputs.unidoc-version }}"
 
         -   name: Download Unidoc
@@ -26,16 +31,14 @@ runs:
                 UNIDOC_MIRROR: "https://static.swiftinit.org/unidoc"
 
             run: |
-                mkdir -p $HOME/unidoc/bin
                 curl -L $UNIDOC_MIRROR/$UNIDOC_VERSION/$UNIDOC_PLATFORM/unidoc.gz \
-                    -o $HOME/unidoc/bin/unidoc.gz
+                    -o ~/unidoc/bin/unidoc.gz
 
         -   name: Install Unidoc
             shell: bash
             run: |
-                mkdir -p $HOME/unidoc/bin
-                gzip -fdk $HOME/unidoc/bin/unidoc.gz
-                chmod +x $HOME/unidoc/bin/unidoc
+                gzip -fdk ~/unidoc/bin/unidoc.gz
+                chmod +x ~/unidoc/bin/unidoc
                 echo "$HOME/unidoc/bin" >> $GITHUB_PATH
 
         -   name: Check Unidoc
