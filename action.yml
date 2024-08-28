@@ -19,7 +19,7 @@ runs:
             id:   cache
             uses: actions/cache@v2
             with:
-                path: "~/unidoc/bin/unidoc.gz"
+                path: "~/unidoc/bin/unidoc.tar.gz"
                 key: "unidoc:${{ runner.os }}-${{ runner.arch }}/${{ inputs.unidoc-version }}"
 
         -   name: Download Unidoc
@@ -31,14 +31,13 @@ runs:
                 UNIDOC_MIRROR: "https://static.swiftinit.org/unidoc"
 
             run: |
-                curl -L $UNIDOC_MIRROR/$UNIDOC_VERSION/$UNIDOC_PLATFORM/unidoc.gz \
-                    -o ~/unidoc/bin/unidoc.gz
+                curl -L $UNIDOC_MIRROR/$UNIDOC_VERSION/$UNIDOC_PLATFORM/unidoc.tar.gz \
+                    -o ~/unidoc/bin/unidoc.tar.gz
 
         -   name: Install Unidoc
             shell: bash
             run: |
-                gzip -fdk ~/unidoc/bin/unidoc.gz
-                chmod +x ~/unidoc/bin/unidoc
+                tar -xf ~/unidoc/bin/unidoc.tar.gz
                 echo "$HOME/unidoc/bin" >> $GITHUB_PATH
 
         -   name: Check Unidoc
