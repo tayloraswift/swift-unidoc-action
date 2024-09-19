@@ -5,7 +5,7 @@ inputs:
     unidoc-version:
         description: "The version of Unidoc to use"
         required: false
-        default: "0.19.2"
+        default: "0.19.3"
 
 runs:
     using: composite
