@@ -17,7 +17,7 @@ runs:
 
         -   name: Cache Unidoc
             id:   cache
-            uses: actions/cache@v2
+            uses: actions/cache@v4
             with:
                 path: "~/unidoc/bin/unidoc.tar.gz"
                 key: "unidoc:${{ runner.os }}-${{ runner.arch }}/${{ inputs.unidoc-version }}"
