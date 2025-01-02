@@ -22,11 +22,22 @@ runs:
                 path: "~/unidoc/bin/unidoc.tar.gz"
                 key: "unidoc:${{ runner.os }}-${{ runner.arch }}/${{ inputs.unidoc-version }}"
 
+        -   name: Detect Platform
+            shell: bash
+            if: runner.os == 'Linux'
+            run: |
+                echo "UNIDOC_PLATFORM=Ubuntu-24.04" >> $GITHUB_ENV
+
+        -   name: Detect Platform
+            shell: bash
+            if: runner.os == 'macOS'
+            run: |
+                echo "UNIDOC_PLATFORM=${{ runner.os }}" >> $GITHUB_ENV
+
         -   name: Download Unidoc
             shell: bash
             if: steps.cache.outputs.cache-hit != 'true'
             env:
-                UNIDOC_PLATFORM: ${{ runner.os }}-${{ runner.arch }}
                 UNIDOC_VERSION: ${{ inputs.unidoc-version }}
                 UNIDOC_MIRROR: "https://static.swiftinit.org/unidoc"
 
