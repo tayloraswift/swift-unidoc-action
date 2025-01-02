@@ -26,6 +26,7 @@ runs:
             shell: bash
             if: runner.os == 'Linux'
             run: |
+                apt install libjemalloc2
                 echo "UNIDOC_PLATFORM=Ubuntu-24.04-${{ runner.arch }}" >> $GITHUB_ENV
 
         -   name: Detect Platform
