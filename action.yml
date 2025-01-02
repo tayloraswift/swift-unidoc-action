@@ -26,13 +26,13 @@ runs:
             shell: bash
             if: runner.os == 'Linux'
             run: |
-                echo "UNIDOC_PLATFORM=Ubuntu-24.04" >> $GITHUB_ENV
+                echo "UNIDOC_PLATFORM=Ubuntu-24.04-${{ runner.arch }}" >> $GITHUB_ENV
 
         -   name: Detect Platform
             shell: bash
             if: runner.os == 'macOS'
             run: |
-                echo "UNIDOC_PLATFORM=${{ runner.os }}" >> $GITHUB_ENV
+                echo "UNIDOC_PLATFORM=${{ runner.os }}-${{ runner.arch }}" >> $GITHUB_ENV
 
         -   name: Download Unidoc
             shell: bash

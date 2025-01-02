@@ -15,8 +15,6 @@ jobs:
         steps:
             -   name: Install Unidoc
                 uses: tayloraswift/swift-unidoc-action@master
-                with:
-                    unidoc-version: "master"
 
             -   name: Check Unidoc
                 run: unidoc --help
@@ -28,8 +26,6 @@ jobs:
         steps:
             -   name: Install Unidoc
                 uses: tayloraswift/swift-unidoc-action@master
-                with:
-                    unidoc-version: "master"
 
             -   name: Check Unidoc
                 run: unidoc --help
