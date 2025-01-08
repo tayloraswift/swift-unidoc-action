@@ -1,7 +1,8 @@
 name: "Unidoc install"
 description: "Install Swift Unidoc"
-icon: check-circle
-color: green
+branding:
+    icon: check-circle
+    color: green
 inputs:
     unidoc-version:
         description: "The version of Unidoc to use"
