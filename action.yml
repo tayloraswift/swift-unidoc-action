@@ -39,7 +39,7 @@ runs:
             if: steps.cache.outputs.cache-hit != 'true'
             env:
                 UNIDOC_VERSION: ${{ inputs.unidoc-version }}
-                UNIDOC_MIRROR: "https://static.swiftinit.org/unidoc"
+                UNIDOC_MIRROR: "https://download.swiftinit.org/unidoc"
 
             run: |
                 curl -L $UNIDOC_MIRROR/$UNIDOC_VERSION/$UNIDOC_PLATFORM/unidoc.tar.gz \
