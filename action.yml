@@ -7,7 +7,7 @@ inputs:
     unidoc-version:
         description: "The version of Unidoc to use"
         required: false
-        default: "0.20.1"
+        default: "0.21.0"
 
 runs:
     using: composite
@@ -57,4 +57,5 @@ runs:
             shell: bash
             run: |
                 cat $GITHUB_PATH
+                unidoc --version
                 unidoc --help
