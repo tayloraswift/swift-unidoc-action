@@ -13,10 +13,10 @@ jobs:
         name: macOS
 
         steps:
-            -   name: Install Unidoc
-                uses: tayloraswift/swift-unidoc-action@master
+            -   name: 💝 Install Unidoc 💝
+                uses: rarestype/swift-unidoc-action@master
 
-            -   name: Check Unidoc
+            -   name: 💝 Check Unidoc 💝
                 run: unidoc --help
 
     linux:
@@ -24,8 +24,8 @@ jobs:
         name: Ubuntu 24.04
 
         steps:
-            -   name: Install Unidoc
-                uses: tayloraswift/swift-unidoc-action@master
+            -   name: 💝 Install Unidoc 💝
+                uses: rarestype/swift-unidoc-action@master
 
-            -   name: Check Unidoc
+            -   name: 💝 Check Unidoc 💝
                 run: unidoc --help
