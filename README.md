@@ -5,7 +5,7 @@ Supported runners:
 - macOS
 - Linux
 
-If the action completes successfully, it installs the [`unidoc`](https://github.com/rarestype/swift-unidoc) tool in the runner’s search path. You can then use `unidoc` to validate the documentation of your Swift project.
+If the action completes successfully, it installs the [`unidoc`](https://github.com/rarestype/unidoc) tool in the runner’s search path. You can then use `unidoc` to validate the documentation of your Swift project.
 
 Although Unidoc can check for a lot of documentation issues, the most commonly diagnosed problem is broken or ambiguous symbol links in documentation comments. Links [often break](https://forums.swift.org/t/human-readable-alternative-for-docc-symbol-link-disambiguation/65792/12) when changing function signatures, **even in source-compatible ways**, so it is essential to validate your documentation regularly.
 
@@ -51,7 +51,7 @@ linux:
                 swift-id: "swift-6.0.2-RELEASE-ubuntu24.04"
 
         -   name: Install Unidoc
-            uses: rarestype/swift-unidoc-action@master
+            uses: rarestype/unidoc-action@master
 
         -   name: Checkout repository
             uses: actions/checkout@v3
@@ -78,7 +78,7 @@ macos:
     name: macOS
     steps:
         -   name: Install Unidoc
-            uses: rarestype/swift-unidoc-action@master
+            uses: rarestype/unidoc-action@master
 
         -   name: Checkout repository
             uses: actions/checkout@v3
@@ -97,7 +97,7 @@ If you want to use a different Swift toolchain than the pre-installed one, you c
 
 Unidoc is currently in use across a number of open source projects, including:
 
-1. [`swift-unidoc`](https://github.com/rarestype/swift-unidoc)
+1. [`unidoc`](https://github.com/rarestype/unidoc)
 1. [`swift-dom`](https://github.com/rarestype/swift-dom)
 1. [`swift-ip`](https://github.com/rarestype/swift-ip)
 1. [`swift-json`](https://github.com/rarestype/swift-json)
