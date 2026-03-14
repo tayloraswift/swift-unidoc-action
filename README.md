@@ -54,7 +54,7 @@ linux:
             uses: rarestype/unidoc-action@master
 
         -   name: Checkout repository
-            uses: actions/checkout@v3
+            uses: actions/checkout@v6
 
         -   name: Validate documentation
             run: |
@@ -81,7 +81,7 @@ macos:
             uses: rarestype/unidoc-action@master
 
         -   name: Checkout repository
-            uses: actions/checkout@v3
+            uses: actions/checkout@v6
 
         -   name: Validate documentation
             run: |
