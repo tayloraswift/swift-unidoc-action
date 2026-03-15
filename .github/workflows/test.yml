@@ -16,10 +16,10 @@ jobs:
             -   name: 💖 Checkout repository 💖
                 uses: actions/checkout@v6
 
-            -   name: 💝 Install Unidoc 💝
+            -   name: 💖 Install Unidoc 💖
                 uses: ./
 
-            -   name: 💝 Check Unidoc 💝
+            -   name: 💖 Check Unidoc 💖
                 run: unidoc --help
 
     linux:
@@ -30,8 +30,8 @@ jobs:
             -   name: 💖 Checkout repository 💖
                 uses: actions/checkout@v6
 
-            -   name: 💝 Install Unidoc 💝
+            -   name: 💖 Install Unidoc 💖
                 uses: ./
 
-            -   name: 💝 Check Unidoc 💝
+            -   name: 💖 Check Unidoc 💖
                 run: unidoc --help
