@@ -22,7 +22,7 @@ runs:
 
                 if [ "$VERSION" = "latest" ]; then
                     VERSION=$(
-                        gh api "repos/${GITHUB_REPOSITORY}/tags" --paginate --jq '.[].name' \
+                        gh api "repos/rarestype/unidoc/tags" --paginate --jq '.[].name' \
                         | grep -E '^[0-9]+\.[0-9]+\.[0-9]+' \
                         | sort -rV | head -n 1 \
                     )
