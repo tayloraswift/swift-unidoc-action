@@ -98,10 +98,10 @@ If you want to use a different Swift toolchain than the pre-installed one, you c
 Unidoc is currently in use across a number of open source projects, including:
 
 1. [`unidoc`](https://github.com/rarestype/unidoc)
-1. [`swift-dom`](https://github.com/rarestype/swift-dom)
+1. [`swift-dom`](https://github.com/tayloraswift/swift-dom)
 1. [`swift-ip`](https://github.com/rarestype/swift-ip)
-1. [`swift-json`](https://github.com/rarestype/swift-json)
-1. [`swift-mongodb`](https://github.com/rarestype/swift-mongodb)
-1. [`swift-noise`](https://github.com/rarestype/swift-noise)
-1. [`swift-png`](https://github.com/rarestype/swift-png)
+1. [`swift-json`](https://github.com/tayloraswift/swift-json)
+1. [`swift-mongodb`](https://github.com/tayloraswift/swift-mongodb)
+1. [`swift-noise`](https://github.com/tayloraswift/swift-noise)
+1. [`swift-png`](https://github.com/tayloraswift/swift-png)
 1. [`swift-on-server/articles`](https://github.com/swift-on-server/articles)
