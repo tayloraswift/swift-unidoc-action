@@ -9,12 +9,12 @@ on:
 
 jobs:
     macos:
-        runs-on: macos-15
+        runs-on: macos-26
         name: macOS
 
         steps:
             -   name: 💝 Install Unidoc 💝
-                uses: rarestype/unidoc-action@master
+                uses: ./
 
             -   name: 💝 Check Unidoc 💝
                 run: unidoc --help
@@ -25,7 +25,7 @@ jobs:
 
         steps:
             -   name: 💝 Install Unidoc 💝
-                uses: rarestype/unidoc-action@master
+                uses: ./
 
             -   name: 💝 Check Unidoc 💝
                 run: unidoc --help

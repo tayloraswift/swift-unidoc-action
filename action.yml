@@ -7,11 +7,33 @@ inputs:
     unidoc-version:
         description: "The version of Unidoc to use"
         required: false
-        default: "0.22.4"
+        default: "latest"
 
 runs:
     using: composite
     steps:
+        -   name: Resolve Unidoc version
+            id: version
+            shell: bash
+            env:
+                GH_TOKEN: ${{ github.token }}
+            run: |
+                VERSION="${{ inputs.unidoc-version }}"
+
+                if [ "$VERSION" = "latest" ]; then
+                    VERSION=$(
+                        gh api "repos/${GITHUB_REPOSITORY}/tags" --paginate --jq '.[].name' \
+                        | grep -E '^[0-9]+\.[0-9]+\.[0-9]+' \
+                        | sort -rV | head -n 1 \
+                    )
+                    if [ "$VERSION" = "null" ] || [ -z "$VERSION" ]; then
+                        echo "Could not determine the latest Unidoc version from GitHub!"
+                        exit 1
+                    fi
+                fi
+
+                echo "version=$VERSION" >> $GITHUB_OUTPUT
+
         -   name: Create installation directory
             shell: bash
             run: |
@@ -22,7 +44,7 @@ runs:
             uses: actions/cache@v4
             with:
                 path: "~/unidoc/bin/unidoc.tar.gz"
-                key: "unidoc:${{ runner.os }}-${{ runner.arch }}/${{ inputs.unidoc-version }}"
+                key: "unidoc:${{ runner.os }}-${{ runner.arch }}/${{ steps.version.outputs.version }}"
 
         -   name: Detect Platform
             shell: bash
@@ -40,7 +62,7 @@ runs:
             shell: bash
             if: steps.cache.outputs.cache-hit != 'true'
             env:
-                UNIDOC_VERSION: ${{ inputs.unidoc-version }}
+                UNIDOC_VERSION: ${{ steps.resolve-version.outputs.version }}
                 UNIDOC_MIRROR: "https://download.rarestype.com/unidoc"
 
             run: |
