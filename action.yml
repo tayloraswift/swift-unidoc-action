@@ -62,7 +62,7 @@ runs:
             shell: bash
             if: steps.cache.outputs.cache-hit != 'true'
             env:
-                UNIDOC_VERSION: ${{ steps.resolve-version.outputs.version }}
+                UNIDOC_VERSION: ${{ steps.version.outputs.version }}
                 UNIDOC_MIRROR: "https://download.rarestype.com/unidoc"
 
             run: |
