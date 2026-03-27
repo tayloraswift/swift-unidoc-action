@@ -18,6 +18,8 @@ runs:
             env:
                 GH_TOKEN: ${{ github.token }}
             run: |
+                # although we can also download from the url path `latest`, we would still need
+                # to compute this in order to get a valid cache key
                 VERSION="${{ inputs.unidoc-version }}"
 
                 if [ "$VERSION" = "latest" ]; then
@@ -50,13 +52,13 @@ runs:
             shell: bash
             if: runner.os == 'Linux'
             run: |
-                echo "UNIDOC_PLATFORM=Ubuntu-24.04-${{ runner.arch }}" >> $GITHUB_ENV
+                echo "UNIDOC_PLATFORM=Linux-$(uname -m)" >> $GITHUB_ENV
 
         -   name: Detect Platform
             shell: bash
             if: runner.os == 'macOS'
             run: |
-                echo "UNIDOC_PLATFORM=${{ runner.os }}-${{ runner.arch }}" >> $GITHUB_ENV
+                echo "UNIDOC_PLATFORM=macOS" >> $GITHUB_ENV
 
         -   name: Download Unidoc
             shell: bash
